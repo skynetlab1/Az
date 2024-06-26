@@ -16,7 +16,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get update -y
 
 # Enable the "universe" repositories
-sudo add-apt-repository -y universe
+sudo add-apt-repository -y noble
 
 # Install PowerShell
 sudo apt-get install -y powershell
