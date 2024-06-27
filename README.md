@@ -1,4 +1,3 @@
-https://github.com/skynetlab1/Az/commit/eefdfaea3333ef6a65f59c3f3f9e141b43b0a523
 
 Environment Setup:
 
