@@ -3,4 +3,4 @@ if (-not $sub) {
   Connect-AzAccount  -Identity
 }
 
-Select-AzSubscription -SubscriptionId $sub.Id
+SetAzSubscription -SubscriptionId $sub.Id
