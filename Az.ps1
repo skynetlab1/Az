@@ -34,6 +34,9 @@ if (-not $resourceGroup) {
   Write-Output "Resource group '$resourceGroupName' already exists."
 }
 
+$output = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
+$SAMI = $output.Identify
+
 if ($SAMI) {
   $roleAssignment = $null
   $roleAssignment = New-AzRoleAssignment -ObjectId $SAMI -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
