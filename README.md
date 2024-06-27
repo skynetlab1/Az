@@ -1,4 +1,3 @@
-
 Environment Setup:
 
 ENV TFC_AGENT_TOKEN=$TFC_AGENT_TOKEN
