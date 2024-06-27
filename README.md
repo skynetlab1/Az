@@ -5,6 +5,15 @@ ENV TFC_AGENT_NAME=$TFC_AGENT_NAME
 just  build the image like: 
 docker build -t your-image-name --build-arg TFC_AGENT_TOKEN=your_token --build-arg TFC_AGENT_NAME=your_name .
 
+The provided information describes a PowerShell script named Az.ps1 that simplifies Azure resource management tasks. Here's a breakdown of its functionalities:
+ * Environment Setup: Sets up the environment to interact with Azure resources using Azure CLI and PowerShell.
+ * Azure Subscription Management: Allows easy login and selection of the desired Azure subscription.
+ * Resource Group Creation: Creates resource groups to organize and manage Azure resources effectively.
+ * Role Assignment (Optional): Assigns roles for access control and security management.
+ * Resource Usage Retrieval: Retrieves resource usage details for a specified date range.
+The script demonstrates essential Azure resource management skills and automates tasks for efficient resource management.
+
+
 Ensure seamless management of Azure resources by setting up the PowerShellGet module and the PSGallery repository. These steps are crucial for efficient resource management using PowerShell.
 
 
