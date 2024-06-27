@@ -35,7 +35,11 @@ if (-not $resourceGroup) {
 }
 
 $output = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
-$SAMI = $output.Identity.PrinpalId
+# Assuming $output contains the result of enabling the system-assigned identity
+$systemAssignedPrincipalId = $output.Identity.PrincipalId
+$subscriptionId = $sub.Id
+$roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope "/subscriptions/$subscriptionId" -RoleDefinitionName "Contributor"
+$SAMI = $systemAssignedPrincipalId
 
 if ($SAMI) {
   $roleAssignment = $null
