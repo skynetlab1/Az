@@ -35,7 +35,7 @@ if (-not $resourceGroup) {
 }
 
 $output = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
-$SAMI = $output.Identify
+$SAMI = $output.Identity.PrinpalId
 
 if ($SAMI) {
   $roleAssignment = $null
