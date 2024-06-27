@@ -20,15 +20,18 @@ ENV GITHUB_OUTPUT=your_value
 ENV GITHUB_SHA=your_value
 ENV GITHUB_ACTOR=your_value
 
-# Add additional steps here
-# For example, to copy a local script into the image:
-# COPY ./your-script.sh /your-script.sh
+
+# Install Azure CLI and PowerShell
+RUN apt-get update && apt-get install -y azure-cli powershell
+
+# Add Azure login command
+RUN az login --service-principal -u $AZURE_SERVICE_PRINCIPAL -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+# Add Azure account connection command
+RUN pwsh -c "Connect-AzAccount -ServicePrincipal -Credential (New-Object System.Management.Automation.PSCredential($AZURE_SERVICE_PRINCIPAL, (ConvertTo-SecureString -String $AZURE_CLIENT_SECRET -AsPlainText -Force))) -Tenant $AZURE_TENANT_ID"
 
 # The command that will be run when a container is started from the image
 CMD ["tfci", "run", "show", "help"]
-
-# Start with a base image that has PowerShell pre-installed
-FROM mcr.microsoft.com/powershell:latest
 
 # Set GitHub environment variables
 ENV GITHUB_TOKEN your_token
