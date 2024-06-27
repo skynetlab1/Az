@@ -39,7 +39,8 @@ $SAMI = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAut
 $systemAssignedPrincipalId = $SAMI.Identity.PrincipalId
 $subscriptionId = $sub.Id
 $roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope "/subscriptions/$subscriptionId" -RoleDefinitionName "Contributor"
-if ($roleAssignment = $null)
+if ($SAMI) {
+  $roleAssignment = null
   $roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
   else ($roleAssignment) {
       Write-Output "Role assignment successful for Automation Account at subscription level."
