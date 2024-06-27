@@ -65,3 +65,4 @@ RUN chmod +x start.sh
 
 # Run the start.sh script when the container starts
 CMD ["./start.sh"]
+p
