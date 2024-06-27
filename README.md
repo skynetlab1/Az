@@ -1,5 +1,8 @@
 Environment Setup:
 
+just  build the image like: 
+docker build -t your-image-name --build-arg TFC_AGENT_TOKEN=your_token --build-arg TFC_AGENT_NAME=your_name .
+
 Ensure seamless management of Azure resources by setting up the PowerShellGet module and the PSGallery repository. These steps are crucial for efficient resource management using PowerShell.
 
 
