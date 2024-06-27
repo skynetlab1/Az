@@ -1,4 +1,6 @@
 Environment Setup:
+ENV TFC_AGENT_TOKEN=$TFC_AGENT_TOKEN
+ENV TFC_AGENT_NAME=$TFC_AGENT_NAME
 
 just  build the image like: 
 docker build -t your-image-name --build-arg TFC_AGENT_TOKEN=your_token --build-arg TFC_AGENT_NAME=your_name .
