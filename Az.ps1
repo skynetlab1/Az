@@ -1,6 +1,4 @@
 $sub = Get-AzSubscription -ErrorAction SilentlyContinue
 if (-not $sub) {
-  Connect-AzAccount  -Identity
+  Connect-AzAccount  
 }
-
-SetAzSubscription -SubscriptionId $sub.Id
