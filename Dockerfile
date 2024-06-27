@@ -1,3 +1,12 @@
+# Use ARG instruction to define build-time variables
+ARG TFC_AGENT_TOKEN
+ARG TFC_AGENT_NAME
+
+# Use ENV instruction to define runtime environment variables
+ENV TFC_AGENT_TOKEN=$TFC_AGENT_TOKEN
+ENV TFC_AGENT_NAME=$TFC_AGENT_NAME
+
+
 # Use hashicorp/tfci as base image
 FROM hashicorp/tfci:latest
 
