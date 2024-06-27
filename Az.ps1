@@ -14,10 +14,10 @@ Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 # Sign in to your Azure subscription
 $sub = Get-AzSubscription -ErrorAction SilentlyContinue
 if (-not $sub) {
-  Connect-AzAccount -Identity
-
+  Connect-AzAccount 
+  #use -Identity  after creating inside Docker images 
 }
-
+#
 # If you have multiple subscriptions, set the one to use
 Select-AzSubscription -SubscriptionId $sub.Id
 
@@ -33,15 +33,10 @@ if (-not $resourceGroup) {
 } else {
   Write-Output "Resource group '$resourceGroupName' already exists."
 }
-
-$SAMI = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
-# Assuming $output contains the result of enabling the system-assigned identity
-$systemAssignedPrincipalId = $SAMI.Identity.PrincipalId
-$subscriptionId = $sub.Id
-$roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope "/subscriptions/$subscriptionId" -RoleDefinitionName "Contributor"
+# $SAMI is secret so enable it by use Set-AzAutomationAccount 
 if ($SAMI) {
-  $roleAssignment = null
-  $roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
+  $roleAssignment = $null
+  $roleAssignment = New-AzRoleAssignment -ObjectId $SAMI -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
   else ($roleAssignment) {
       Write-Output "Role assignment successful for Automation Account at subscription level."
 
