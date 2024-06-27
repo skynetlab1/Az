@@ -34,16 +34,14 @@ if (-not $resourceGroup) {
   Write-Output "Resource group '$resourceGroupName' already exists."
 }
 
-$output = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
+$SAMI = Set-AzAutomationAccount -ResourceGroupName  "AutomationAz"  -Name "AzAutomationMI" -AssignSystemIdentity 
 # Assuming $output contains the result of enabling the system-assigned identity
-$systemAssignedPrincipalId = $output.Identity.PrincipalId
+$systemAssignedPrincipalId = $SAMI.Identity.PrincipalId
 $subscriptionId = $sub.Id
 $roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope "/subscriptions/$subscriptionId" -RoleDefinitionName "Contributor"
-$SAMI = $systemAssignedPrincipalId
-
 if ($SAMI) {
   $roleAssignment = $null
-  $roleAssignment = New-AzRoleAssignment -ObjectId $SAMI -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
+  $roleAssignment = New-AzRoleAssignment -ObjectId $systemAssignedPrincipalId -Scope $scope -RoleDefinitionName "Contributor" -ErrorAction SilentlyContinue
   else ($roleAssignment) {
       Write-Output "Role assignment successful for Automation Account at subscription level."
 
